@@ -20,13 +20,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK (android-36, build-tools 35.0.0)
-        uses: android-actions/setup-android@v3
-
-      - name: Install SDK packages
+      # GitHub's ubuntu runners ship the Android SDK (commandlinetools) at $ANDROID_HOME.
+      - name: Install SDK packages (android-36, build-tools 35.0.0)
         run: |
-          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;35.0.0" "platform-tools"
+          sdkmanager=$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager
+          (yes | "$sdkmanager" --licenses) > /dev/null || true
+          "$sdkmanager" "platforms;android-36" "build-tools;35.0.0" "platform-tools"
 
       - name: Build (aapt2 -> javac -> d8 -> zipalign -> apksigner)
         run: pwsh ./rebuild/build.ps1 -Out "$GITHUB_WORKSPACE/rebuild/dist/raazdar-arrowpuzzle-1.0.0.apk"
