@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android launcher display name: Arrow Puzzle. Brand appears in About. -->
+    <string name="app_name">Arrow Puzzle</string>
+    <string name="undo">Undo move</string>
+    <string name="hint">Hint</string>
+    <string name="reset">Restart level</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="haptics">Haptic feedback</string>
+    <string name="level_label">Level %1$d</string>
+    <string name="win_title">Level complete!</string>
+    <string name="fail_title">Out of hearts</string>
+    <string name="next_level">Next level</string>
+    <string name="retry">Try again</string>
+</resources>

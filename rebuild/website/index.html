@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<!-- Draft landing page for https://raazdar.xyz/arrow-puzzle â€” source deliverable.
+     Deployment requires authorization/access to raazdar.xyz hosting (not performed here). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arrow Puzzle Game | Raazdar</title>
+<meta name="description" content="Arrow Puzzle by Raazdar is a fun brain teaser: tap arrows to clear their paths, clear every arrow from the grid, and challenge your logic. Play offline.">
+<link rel="canonical" href="https://raazdar.xyz/arrow-puzzle">
+<meta property="og:title" content="Arrow Puzzle Game | Raazdar">
+<meta property="og:description" content="Tap arrows to clear their paths on the grid. A fun, offline brain teaser game by Raazdar.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://raazdar.xyz/arrow-puzzle">
+<meta property="og:image" content="https://raazdar.xyz/arrow-puzzle/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root { --ink:#1c2430; --paper:#f6f4ef; --accent:#e07b39; }
+  body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink); background:var(--paper); line-height:1.6; }
+  main { max-width:720px; margin:0 auto; padding:2.5rem 1.25rem 4rem; }
+  header { display:flex; align-items:baseline; gap:.6rem; border-bottom:1px solid #ddd6c8; padding-bottom:1rem; }
+  .brand { font-weight:800; letter-spacing:.5px; }
+  h1 { font-size:2.2rem; margin:2.2rem 0 .5rem; }
+  .tagline { color:#5a564b; margin-top:0; }
+  .board { display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; max-width:320px; margin:2rem 0; }
+  .cell { aspect-ratio:1; display:grid; place-items:center; background:#fff; border:2px solid #d9d2c2; border-radius:10px; font-size:1.4rem; }
+  ol.rules li { margin: .6rem 0; }
+  .cta { display:inline-block; margin-top:1.5rem; padding:.8rem 1.4rem; background:var(--accent); color:#fff; text-decoration:none; border-radius:999px; font-weight:600; }
+  .cta:hover { filter:brightness(1.05); }
+  footer { margin-top:3rem; color:#7a7568; font-size:.9rem; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Arrow Puzzle",
+  "description": "A logic puzzle game by Raazdar: tap arrows to clear their paths and remove every arrow from the grid. Playable offline.",
+  "brand": { "@type": "Brand", "name": "Raazdar" },
+  "url": "https://raazdar.xyz/arrow-puzzle",
+  "gameplayMode": "single-player",
+  "playMode": "SinglePlayer",
+  "applicationCategory": "Game",
+  "operatingSystem": "Android"
+}
+</script>
+</head>
+<body>
+<main>
+  <header>
+    <span class="brand">Raazdar</span>
+    <span style="color:#8a8271;">raazdar.xyz</span>
+  </header>
+
+  <h1>Arrow Puzzle</h1>
+  <p class="tagline">A brain teaser of directions, jammed paths, and the right order to clear them â€” by Raazdar.</p>
+
+  <!-- Decorative arrow board rendered as text/geometry so the page loads without image requests.
+       Replace cells with real gameplay screenshots when publishing (see below). -->
+  <div class="board" aria-hidden="true">
+    <div class="cell">â†‘</div><div class="cell">â†’</div><div class="cell">â†“</div><div class="cell">â†“</div>
+    <div class="cell">â†</div><div class="cell">â†‘</div><div class="cell">â†’</div><div class="cell">â†</div>
+    <div class="cell">â†“</div><div class="cell">â†</div><div class="cell">â†‘</div><div class="cell">â†’</div>
+  </div>
+
+  <h2>How it works</h2>
+  <ol class="rules">
+    <li>Every arrow points in one of four directions â€” up, right, down, or left.</li>
+    <li>Tap an arrow and it flies off the board in the direction it faces.</li>
+    <li>It only escapes if nothing stands in its way. A blocked arrow stays on the board.</li>
+    <li>Clear every arrow to finish the level â€” but pick the order carefully.</li>
+  </ol>
+
+  <h2>Why you will like it</h2>
+  <ul>
+    <li><strong>A proper brain teaser.</strong> Progression in Arrow Puzzle demands reading the whole board, not tapping at random.</li>
+    <li><strong>Offline puzzle game.</strong> The full puzzle set ships inside the app â€” play on the subway or on a plane.</li>
+    <li><strong>Lightweight.</strong> No account, no waiting. Open and play.</li>
+  </ul>
+
+  <h2>Screenshots</h2>
+  <!-- TÔODO: publish real gameplay screenshots and restore descriptive alt text:
+  <img src="screenshot-1.png" alt="Arrow Puzzle game board with directional arrows on a 4 by 4 grid" width="400">
+  <img src="screenshot-2.png" alt="An arrow flying off the board after a successfully cleared path" width="400">
+  -->
+
+  <a class="cta" href="#play-store" aria-disabled="true">Get it on Google Play</a>
+  <!-- TODO: link goes live once the Play listing is public. Do not link until the listing exists. -->
+
+  <footer>
+    <p>Raazdar is an independent developer. Arrow Puzzle is a product of Raazdar â€” <a href="https://raazdar.xyz">raazdar.xyz</a>.
+    Read the <a href="/arrow-puzzle/privacy">privacy policy</a>.</p>
+    <p>Not affiliated with any other puzzle game or its developer.</p>
+  </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Build outputs are produced in CI (actions artifact) — keep repo source-only
+*.apk
+*.idsig
+
+# Build intermediates
+rebuild/.build/
+audit/validation_tmp/
+*.class
+
+# OS noise
+Thumbs.db
+.DS_Store

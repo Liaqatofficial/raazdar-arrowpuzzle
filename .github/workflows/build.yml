@@ -1,0 +1,56 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["**.md"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK (android-36, build-tools 35.0.0)
+        uses: android-actions/setup-android@v3
+
+      - name: Install SDK packages
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;35.0.0" "platform-tools"
+
+      - name: Build (aapt2 -> javac -> d8 -> zipalign -> apksigner)
+        run: pwsh ./rebuild/build.ps1 -Out "$GITHUB_WORKSPACE/rebuild/dist/raazdar-arrowpuzzle-1.0.0.apk"
+
+      - name: Verify signature
+        run: |
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools/35.0.0" -name apksigner)
+          "$APKSIGNER" verify --print-certs rebuild/dist/raazdar-arrowpuzzle-1.0.0.apk
+
+      - name: Run host model tests
+        run: pwsh ./rebuild/run-tests.ps1
+
+      # In CI a fresh debug keystore is generated per build (keytool) — reproducible installs
+      # require a persistent release keystore supplied via secrets. Debug builds are for testing.
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: raazdar-arrowpuzzle-debug
+          path: |
+            rebuild/dist/raazdar-arrowpuzzle-1.0.0.apk
+          if-no-files-found: error
+
+      - name: Attach APK to tag release (only when a tag is pushed)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: rebuild/dist/*.apk

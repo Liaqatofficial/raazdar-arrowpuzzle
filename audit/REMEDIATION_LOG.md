@@ -1,0 +1,17 @@
+# Remediation Log — Arrow Puzzle audit
+
+Backups: original APK untouched at `G:\My Drive\apk\base.apk` and `C:\APK-Rebuild-Project\original.apk` (SHA-256 equal, recorded in REVERSE_ENGINEERING_AUDIT.md).
+
+| # | Date | Defect found (evidence) | Severity | Fix applied | Verification |
+|---|---|---|---|---|---|
+| 1 | 2026-10-26 | `analysis/API_AND_BACKEND.md` claims app link host `arrowpuzzlegp.easybrain.com` as "primary deep linking routing"; manifest deep links use custom scheme `easybrainarrowpuzzlegame` + `easybrain://launch_*` hosts (AndroidManifest lines 153–161). No https host verified. | Medium | Corrected in REVERSE_ENGINEERING_AUDIT.md §3 (deep-link row). No source change needed. | Manifest re-read |
+| 2 | 2026-10-26 | SECURITY report claims "15 permissions"; manifest declares 15 listed + `com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE` + custom `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`. | Low | Count corrected in REVERSE_ENGINEERING_AUDIT.md and FEATURE_COVERAGE_MATRIX.md. | Manifest re-read |
+| 3 | 2026-10-26 | No runnable audit tooling existed for verifying the 1,056-stream claim reproducibly. | Medium | Added `C:\APK-Rebuild-Project\tools\audit_gzip5.js` (CRC-32-validated sequential gzip parser, wrote `streams_index.csv`). 838/1,056 streams CRC-verified; streams 1 and 2 extracted and content-inspected. | tool output recorded in TEST_EVIDENCE.md |
+| 4 | 2026-10-26 | Prior reports present inferred gameplay specifics (economy values, level-format headers, difficulty curve) as if established. | High | Downgraded statuses to PARTIALLY VERIFIED / UNVERIFIED in Feature Coverage Matrix; store-listing copy in `rebuild/` uses only verified mechanics. | This audit |
+| 5 | 2026-10-26 | Project lacked any rebuild app source (FEATURE_PARITY_CHECKLIST described intentions, not code). | High (for delivery) | Resolved in entry 8 below. | repo listing |
+| 6 | 2026-10-26 | Mid-audit received updated requirements: rebrand to **Raazdar** + SEO package. | — | Created `rebuild/BRAND_IDENTITY.md`, `rebuild/store-listing/STORE_LISTING.md`, `rebuild/website/index.html`, `rebuild/store-listing/PUBLISHING_CHECKLIST.md` | files present |
+| 7 | 2026-10-26 | Requirement text provided a short description of 86 chars (> Play's 80-char limit). | Medium | Kept client copy verbatim with measured proof, added compliant 80/80 alternative; console must use the compliant variant. | character-count measurement documented in STORE_LISTING.md |
+| 8 | 2026-10-26 | Rebuild app missing entirely (no source, no APK). | High | Implemented `rebuild/app` (Java, offline, verified mechanics only), build pipeline `rebuild/build.ps1` (aapt2→javac→d8→apksigner), host test suite, installed and played on emulator. APK: `rebuild/dist/raazdar-arrowpuzzle-1.0.0.apk` (33 KB, signed). Original APK untouched (hash re-verified). | HOST tests PASS; on-device: Level 1 solved via real adb taps → win dialog → Level 2; 3 blocked taps → fail dialog; TRY AGAIN restored ♥3 preserving cleared arrows; Settings shows Raazdar brand; hint & undo OK; no crashes. screenshots in `rebuild/store-listing/screenshots/` |
+| 9 | 2026-10-26 | `Game.tap(-1,-1)` crashed the model during regression testing. | Medium | Added bounds validation returning EMPTY; regression test added (HostTest). | HostTest PASS |
+
+Fixed-item rule: any accepted conclusion that later evidence contradicts must be amended in both the audit and the store-listing copy, not silently.

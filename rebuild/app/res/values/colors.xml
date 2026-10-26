@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="board_bg">#F4EFE6</color>
+    <color name="cell_bg">#FFFFFF</color>
+    <color name="cell_line">#D8D2C2</color>
+    <color name="blocker">#253044</color>
+    <color name="accent">#E07429</color>
+</resources>

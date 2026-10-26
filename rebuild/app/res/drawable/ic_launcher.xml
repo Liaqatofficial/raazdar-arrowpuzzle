@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Original Raazdar launcher icon: orange arrow head on dark rounded tile. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#253044"
+        android:pathData="M8,0 h32 a8,8 0 0 1 8,8 v32 a8,8 0 0 1 -8,8 h-32 a8,8 0 0 1 -8,-8 v-32 a8,8 0 0 1 8,-8 z"/>
+    <path android:fillColor="#E07429"
+        android:pathData="M14,30 L24,12 L34,30 L29,30 L24,21 L19,30 Z"/>
+    <path android:fillColor="#E07429"
+        android:pathData="M22,18 h4 v18 h-4 Z"/>
+</vector>
